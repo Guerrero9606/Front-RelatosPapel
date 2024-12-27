@@ -1,0 +1,18 @@
+/* Establece el tamaño de las tarjetas */
+.card {
+  height: 500px;
+  margin: 15px;
+  border-color: darkgray;
+  border-style: solid;
+}
+
+/* Controla el tamaño de la imagen */
+.card img {
+  height: 70%;      
+  object-fit: cover;
+  width: 100%; /* Hace que la imagen ocupe todo el ancho de la tarjeta */
+}
+
+.badge {
+    margin: 10px;
+}
