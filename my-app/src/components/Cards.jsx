@@ -6,12 +6,12 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Link } from 'react-router-dom';
 
-const fetchBooksFromOpenLibrary = async (query) => {
+const fetchBooksFromOpenLibrary = async (query, items) => {
   try {
     const response = await fetch(`https://openlibrary.org/search.json?q=${query}`);
     if (!response.ok) throw new Error('Error fetching data');
     const data = await response.json();
-    return data.docs.slice(0, 5).map((book) => ({
+    return data.docs.slice(0, items).map((book) => ({
       id: book.key.replace('works/', ''),
       title: book.title,
       author: book.author_name ? book.author_name[0] : 'Autor desconocido',
@@ -25,16 +25,16 @@ const fetchBooksFromOpenLibrary = async (query) => {
   }
 };
 
-function Cards({ query }) {
+function Cards({ query, items }) {
   const [books, setBooks] = useState([]);
 
   useEffect(() => {
     const loadBooks = async () => {
-      const booksData = await fetchBooksFromOpenLibrary(query);
+      const booksData = await fetchBooksFromOpenLibrary(query, items);
       setBooks(booksData);
     };
     loadBooks();
-  }, [query]);
+  }, [query, items]);
 
   return (
     <Row xs={4} md={6} lg={5} className="g-4">
@@ -46,10 +46,10 @@ function Cards({ query }) {
               <Card.Title>{book.title}</Card.Title>
               <Card.Text>Autor: {book.author}</Card.Text>
             </Card.Body>
-            <ButtonGroup size="sm" >
-                <Button variant="primary">Añadir al carrito</Button>
+            <ButtonGroup>
+                <Button variant="primary" size="sm" >Añadir al carrito</Button>
                 <Link to={`/book${book.id}`}>
-                <Button variant="info">Detalles</Button>
+                <Button variant="info" size="sm" >Detalles</Button>
                 </Link>
             </ButtonGroup>
           </Card>

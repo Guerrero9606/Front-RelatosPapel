@@ -36,7 +36,7 @@ function BookDetails() {
   : 'https://via.placeholder.com/150?text=Sin+Imagen'
 
   return (
-    <Card style={{ width: '48rem', height: '50rem'}}>
+    <Card style={{ width: '48rem', height: '50rem'}} border="dark">
         <Card.Img variant="top" src={urlImg}/>
         <Card.Body>
             <Card.Title>

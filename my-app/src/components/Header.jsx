@@ -13,9 +13,9 @@ function Header () {
           {['sm'].map((expand) => (
             <Navbar key={expand} expand={expand} className="bg-body-tertiary" bg="dark" data-bs-theme="dark">
               <Container fluid>
-                <Link to={'/'}>
-                    <Navbar.Brand href="/">RELATOS DE PAPEL</Navbar.Brand>
-                </Link>
+                <Navbar.Brand>
+                    <Nav.Link href="/">RELATOS DE PAPEL</Nav.Link>
+                </Navbar.Brand>
                 <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
                 <Navbar.Offcanvas
                   id={`offcanvasNavbar-expand-${expand}`}
@@ -32,18 +32,18 @@ function Header () {
                       <Nav.Link href="/">Home</Nav.Link>
                       <Nav.Link href="#action2">Link</Nav.Link>
                       <NavDropdown
-                        title="Categorias"
+                        title="Categorias principales"
                         id={`offcanvasNavbarDropdown-expand-${expand}`}
                       >
-                        <NavDropdown.Item href="#action3">
+                        <NavDropdown.Item href="/Javascript">
                             Javascript
                         </NavDropdown.Item>
-                        <NavDropdown.Item href="#action4">
+                        <NavDropdown.Item href="/Python">
                             Python
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="#action5">
-                            Java
+                        <NavDropdown.Item href="/Criptografia">
+                            Criptografía
                         </NavDropdown.Item>
                       </NavDropdown>
                     </Nav>
