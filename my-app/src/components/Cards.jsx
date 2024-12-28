@@ -4,6 +4,7 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
+import { Link } from 'react-router-dom';
 
 const fetchBooksFromOpenLibrary = async (query) => {
   try {
@@ -11,7 +12,7 @@ const fetchBooksFromOpenLibrary = async (query) => {
     if (!response.ok) throw new Error('Error fetching data');
     const data = await response.json();
     return data.docs.slice(0, 5).map((book) => ({
-      id: book.key,
+      id: book.key.replace('works/', ''),
       title: book.title,
       author: book.author_name ? book.author_name[0] : 'Autor desconocido',
       cover: book.cover_i
@@ -47,7 +48,9 @@ function Cards({ query }) {
             </Card.Body>
             <ButtonGroup size="sm" >
                 <Button variant="primary">Añadir al carrito</Button>
+                <Link to={`/book${book.id}`}>
                 <Button variant="info">Detalles</Button>
+                </Link>
             </ButtonGroup>
           </Card>
         </Col>
