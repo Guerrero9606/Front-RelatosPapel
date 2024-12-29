@@ -30,6 +30,8 @@ La aplicación está optimizada para diferentes dispositivos y asegura la protec
 - **Almacenamiento:** Context API para manejo del carrito de compras.
 
 ## Estructura del Proyecto
+
+```plaintext
 ├── public
 │   └── vite.svg
 ├── src
@@ -57,6 +59,7 @@ La aplicación está optimizada para diferentes dispositivos y asegura la protec
 │       ├── Main.jsx
 │       └── Python.jsx
 └── vite.config.js
+```
 
 ## Instalación
 
