@@ -1,10 +1,14 @@
 {
-    "redirects": [
-      {
-        "source": "/:path*",
-        "destination": "/",
-        "permanent": false
-      }
-    ]
-  }
-  
+  "builds": [
+    {
+      "src": "src/main.jsx",
+      "use": "@vercel/static-build"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/(.*)",
+      "dest": "/index.html"
+    }
+  ]
+}
