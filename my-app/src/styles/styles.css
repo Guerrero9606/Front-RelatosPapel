@@ -44,3 +44,7 @@
 body {
   background-color: orange;
 }
+
+.ProgressBar {
+  margin: 10px;
+}

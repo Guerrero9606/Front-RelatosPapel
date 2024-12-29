@@ -6,7 +6,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
-import Spinner from 'react-bootstrap/Spinner';
+import ProgressBar from 'react-bootstrap/ProgressBar';
 
 const fetchBooksFromOpenLibrary = async (query, items) => {
   try {
@@ -43,10 +43,8 @@ function Cards({ query, items }) {
     dispatch({ type: 'ADD_TO_CART', payload: book });
   };
 
-  if (!books) {
-    return  <Spinner animation="border" role="status" variant="light">
-              <span className="visually-hidden">Loading...</span>
-            </Spinner>
+  if (books.length == 0) {
+    return  <ProgressBar animated now={45} />;
   }
 
   return (

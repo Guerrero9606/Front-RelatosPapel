@@ -2,6 +2,7 @@ import React from 'react';
 import Badge from 'react-bootstrap/Badge';
 import { useCart } from './CartContext';
 import { Button, Table } from 'react-bootstrap';
+import Alert from 'react-bootstrap/Alert';
 
 const Cart = () => {
   const { cart, dispatch } = useCart();
@@ -45,7 +46,9 @@ const Cart = () => {
           </tbody>
         </Table>
       ) : (
-        <p>Tu carrito está vacío</p>
+        <Alert key="dark" variant="dark">
+            Tu carrito de compras esta vacio, ve al <Alert.Link href="/Home">inicio</Alert.Link> para agregar elementos a tu carrito.
+        </Alert>
       )}
 
       {cart.length > 0 && (
