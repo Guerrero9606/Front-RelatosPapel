@@ -29,7 +29,7 @@ function Header () {
                   </Offcanvas.Header>
                   <Offcanvas.Body>
                     <Nav className="justify-content-end flex-grow-1 pe-3">
-                      <Nav.Link href="/">Inicio</Nav.Link>
+                      <Nav.Link href="/Home">Inicio</Nav.Link>
                       <Nav.Link href="/Cart">Carrito de compras</Nav.Link>
                       <NavDropdown
                         title="Categorias principales"

@@ -6,6 +6,7 @@ import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Link } from 'react-router-dom';
 import { useCart } from './CartContext';
+import Spinner from 'react-bootstrap/Spinner';
 
 const fetchBooksFromOpenLibrary = async (query, items) => {
   try {
@@ -42,11 +43,23 @@ function Cards({ query, items }) {
     dispatch({ type: 'ADD_TO_CART', payload: book });
   };
 
+  if (!books) {
+    return  <Spinner animation="border" role="status" variant="light">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
+  }
+
   return (
     <Row xs={4} md={6} lg={5} className="g-4">
       {books.map((book) => (
         <Col key={book.id}>
-          <Card>
+          {[
+            'Dark',
+          ].map((variant) => (
+          <Card bg={variant.toLowerCase()}
+            key={variant}
+            text={variant.toLowerCase() === 'light' ? 'dark' : 'white'}
+          >
             <Card.Img variant="top" src={book.cover} alt={book.title} />
             <Card.Body>
               <Card.Title>{book.title}</Card.Title>
@@ -55,10 +68,11 @@ function Cards({ query, items }) {
             <ButtonGroup>
                 <Button variant="primary" size="sm" onClick={() => addToCart(book)}>Añadir al carrito</Button>
                 <Link to={`/book${book.id}`}>
-                <Button variant="info" size="sm" >Detalles</Button>
+                <Button variant="light" size="sm" >Detalles</Button>
                 </Link>
             </ButtonGroup>
           </Card>
+          ))}
         </Col>
       ))}
     </Row>

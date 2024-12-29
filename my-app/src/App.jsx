@@ -6,14 +6,17 @@ import Javascript from './views/Javascript';
 import Python from './views/Python';
 import Criptografia from './views/Criptografia';
 import CartDetails from './views/CartDetails';
+import Landing from './views/Landing';
 import { CartProvider } from './components/CartContext';
+import './styles/styles.css';
 
 function App() {
   return (
     <CartProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<Main />} />
+          <Route path="/" element={<Landing />} />
+          <Route path="/Home" element={<Main />} />
           <Route path="/book/:id" element={<DetailsBooks />} />
           <Route path="/Javascript" element={<Javascript />} />
           <Route path="/Python" element={<Python />} />

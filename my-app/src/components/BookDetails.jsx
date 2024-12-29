@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
+import { useCart } from './CartContext';
+import Spinner from 'react-bootstrap/Spinner';
 
 const fetchBookDetails = async (id) => {
   try {
@@ -18,6 +20,7 @@ const fetchBookDetails = async (id) => {
 function BookDetails() {
   const { id } = useParams(); // Obtener el ID de la URL
   const [book, setBook] = useState(null);
+  const { dispatch } = useCart();
 
   useEffect(() => {
     const loadBookDetails = async () => {
@@ -27,8 +30,14 @@ function BookDetails() {
     loadBookDetails();
   }, [id]);
 
+  const addToCart = (book) => {
+    dispatch({ type: 'ADD_TO_CART', payload: book });
+  };
+
   if (!book) {
-    return <div>Cargando detalles...</div>;
+    return  <Spinner animation="border" role="status" variant="light">
+              <span className="visually-hidden">Loading...</span>
+            </Spinner>
   }
 
   const urlImg = book.covers
@@ -36,7 +45,7 @@ function BookDetails() {
   : 'https://via.placeholder.com/150?text=Sin+Imagen'
 
   return (
-    <Card style={{ width: '48rem', height: '50rem'}} border="dark">
+    <Card style={{ width: '48rem', height: '50rem'}} border="dark" bg="dark" text='white'>
         <Card.Img variant="top" src={urlImg}/>
         <Card.Body>
             <Card.Title>
@@ -45,7 +54,7 @@ function BookDetails() {
             <Card.Text>
                 Descripcion: {book.description ? book.description : 'No hay descripción disponible.'}
             </Card.Text>
-            <Button variant="primary">Comprar</Button>
+            <Button variant="primary" onClick={() => addToCart(book)}>Comprar</Button>
         </Card.Body>
         <Card.Footer>
           <small className="text-muted">Last updated: {book['last_modified']['value']}</small>
