@@ -5,6 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import ButtonGroup from 'react-bootstrap/ButtonGroup';
 import { Link } from 'react-router-dom';
+import { useCart } from './CartContext';
 
 const fetchBooksFromOpenLibrary = async (query, items) => {
   try {
@@ -27,6 +28,7 @@ const fetchBooksFromOpenLibrary = async (query, items) => {
 
 function Cards({ query, items }) {
   const [books, setBooks] = useState([]);
+  const { dispatch } = useCart();
 
   useEffect(() => {
     const loadBooks = async () => {
@@ -35,6 +37,10 @@ function Cards({ query, items }) {
     };
     loadBooks();
   }, [query, items]);
+
+  const addToCart = (book) => {
+    dispatch({ type: 'ADD_TO_CART', payload: book });
+  };
 
   return (
     <Row xs={4} md={6} lg={5} className="g-4">
@@ -47,7 +53,7 @@ function Cards({ query, items }) {
               <Card.Text>Autor: {book.author}</Card.Text>
             </Card.Body>
             <ButtonGroup>
-                <Button variant="primary" size="sm" >Añadir al carrito</Button>
+                <Button variant="primary" size="sm" onClick={() => addToCart(book)}>Añadir al carrito</Button>
                 <Link to={`/book${book.id}`}>
                 <Button variant="info" size="sm" >Detalles</Button>
                 </Link>
