@@ -5,9 +5,12 @@ import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
 import NavDropdown from 'react-bootstrap/NavDropdown';
 import Offcanvas from 'react-bootstrap/Offcanvas';
+import Badge from 'react-bootstrap/Badge';
 import { Link } from 'react-router-dom';
+import CartOffCanvas from './CartOffCanvas';
 
 function Header () {
+
     return (
         <>
           {['sm'].map((expand) => (
@@ -30,7 +33,6 @@ function Header () {
                   <Offcanvas.Body>
                     <Nav className="justify-content-end flex-grow-1 pe-3">
                       <Nav.Link href="/Home">Inicio</Nav.Link>
-                      <Nav.Link href="/Cart">Carrito de compras</Nav.Link>
                       <NavDropdown
                         title="Categorias principales"
                         id={`offcanvasNavbarDropdown-expand-${expand}`}
@@ -46,6 +48,7 @@ function Header () {
                             Criptografía
                         </NavDropdown.Item>
                       </NavDropdown>
+                      <Nav.Link href="#"><CartOffCanvas /></Nav.Link>
                     </Nav>
                     <Form className="d-flex">
                       <Form.Control

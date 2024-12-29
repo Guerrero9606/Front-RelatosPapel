@@ -1,12 +1,13 @@
-import React from 'react';
+import { React, useState } from 'react';
 import Badge from 'react-bootstrap/Badge';
 import { useCart } from './CartContext';
 import { Button, Table } from 'react-bootstrap';
 import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
 
-const Cart = () => {
+const Checkout = () => {
   const { cart, dispatch } = useCart();
+  const [show, setShow] = useState(false);
 
   const removeFromCart = (book) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: book });
@@ -48,7 +49,7 @@ const Cart = () => {
         </Table>
       ) : (
         <Alert key="dark" variant="dark">
-            Tu carrito de compras esta vacio, ve al inicio para agregar elementos a tu carrito.
+            Tu carrito de compras esta vacio, ve al <Alert.Link href="/Home">inicio</Alert.Link> para agregar elementos a tu carrito.
         </Alert>
       )}
 
@@ -57,13 +58,25 @@ const Cart = () => {
             <Button variant="secondary" onClick={clearCart}>
                 Vaciar Carrito
             </Button>
-            <Link to={`/Cart`}>
-                <Button variant="success" className="ms-2">Proceder con el pago</Button>
-            </Link>   
+            <Alert show={show} variant="success">
+            <Alert.Heading>Pago realizado</Alert.Heading>
+                <p>
+                Su pago se ha realizado satisfactoriamente, al cerrar esta ventana sera redirigido al inicio.
+                </p>
+                <hr />
+                <div className="d-flex justify-content-end">
+                <Link to={`/`}>
+                    <Button onClick={() => {setShow(false), clearCart() }} variant="outline-success">
+                        Cerrar
+                    </Button>
+                </Link>
+                </div>
+            </Alert>
+            {!show && <Button onClick={ () => setShow(true) } className="ms-2" variant="success">Pagar</Button>}
         </div>
       )}
     </div>
   );
 };
 
-export default Cart;
+export default Checkout;
