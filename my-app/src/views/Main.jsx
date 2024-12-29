@@ -8,19 +8,19 @@ function Main () {
         <>
             <Header/>
             <h3>
-                <Badge bg="secondary">Programacion</Badge>
+                <Badge bg="dark">Programacion</Badge>
             </h3>
             <Cards query="Programacion" items="5"/>
             <h3>
-                <Badge bg="secondary">Desarrollo de software</Badge>
+                <Badge bg="dark">Desarrollo de software</Badge>
             </h3>
             <Cards query="desarrollo+de+software" items="5"/>
             <h3>
-                <Badge bg="secondary">Seguridad informatica</Badge>
+                <Badge bg="dark">Seguridad informatica</Badge>
             </h3>
             <Cards query="Seguridad+informática" items="5"/>
             <h3>
-                <Badge bg="secondary">Computacion</Badge>
+                <Badge bg="dark">Computacion</Badge>
             </h3>
             <Cards query="Computación" items="5"/>
         </>

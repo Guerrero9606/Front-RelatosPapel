@@ -1,4 +1,5 @@
 import React from 'react';
+import Badge from 'react-bootstrap/Badge';
 import { useCart } from './CartContext';
 import { Button, Table } from 'react-bootstrap';
 
@@ -14,10 +15,12 @@ const Cart = () => {
   };
 
   return (
-    <div>
-      <h2>Carrito de Compras</h2>
+    <div id="div-table">
+        <h2>
+        <Badge bg="dark">Carrito de compras</Badge>
+        </h2>
       {cart.length > 0 ? (
-        <Table striped bordered hover>
+        <Table striped bordered hover size='sm'>
           <thead>
             <tr>
               <th>#</th>
@@ -46,7 +49,7 @@ const Cart = () => {
       )}
 
       {cart.length > 0 && (
-        <div>
+        <div id="div-buttoms-table">
           <Button variant="secondary" onClick={clearCart}>
             Vaciar Carrito
           </Button>
