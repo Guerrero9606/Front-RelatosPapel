@@ -7,6 +7,7 @@ import Python from './views/Python';
 import Criptografia from './views/Criptografia';
 import CartDetails from './views/CartDetails';
 import Landing from './views/Landing';
+import Find from './views/Find';
 import { CartProvider } from './components/CartContext';
 import './styles/styles.css';
 
@@ -22,6 +23,7 @@ function App() {
           <Route path="/Python" element={<Python />} />
           <Route path="/Criptografia" element={<Criptografia />} />
           <Route path="/Cart" element={<CartDetails />} />
+          <Route path="/Find" element={<Find />} />
         </Routes>
       </Router>
     </CartProvider>
