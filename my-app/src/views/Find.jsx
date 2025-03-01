@@ -1,8 +1,6 @@
-import Header from '../components/Header'
-import Cards from '../components/Cards'
-import Badge from 'react-bootstrap/Badge';
 import '../styles/styles.css';
 import { useLocation } from "react-router-dom";
+import FindBook from '../components/FindBook';
 import React from "react";
 
 function Find () {
@@ -13,11 +11,7 @@ function Find () {
 
     return(
         <>
-            <Header/>
-            <h3>
-                <Badge bg="secondary">Busqueda por: {queryText} </Badge>
-            </h3>
-            <Cards query={queryText} items="10"/>
+            <FindBook queryText={queryText}/>
         </>
     )
 }

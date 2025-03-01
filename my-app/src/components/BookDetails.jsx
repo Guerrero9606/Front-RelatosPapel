@@ -4,13 +4,21 @@ import Button from 'react-bootstrap/Button';
 import Card from 'react-bootstrap/Card';
 import { useCart } from './CartContext';
 import Spinner from 'react-bootstrap/Spinner';
+import axios from 'axios';
 
 const fetchBookDetails = async (id) => {
+  console.log(id)
   try {
-    const response = await fetch(`https://openlibrary.org/works/${id}.json`);
-    if (!response.ok) throw new Error('Error fetching book details');
-    const data = await response.json();
+    const url = "http://localhost:8762/ms-books-catalogue/books/";
+
+    const response = await axios.post(url + id,  {"targetMethod": "GET"});
+
+    if (!response.status) throw new Error('Error fetching book details');
+
+    const data = response.data;
+
     return data;
+
   } catch (error) {
     console.error('Error:', error);
     return null;
@@ -40,8 +48,8 @@ function BookDetails() {
             </Spinner>
   }
 
-  const urlImg = book.covers
-  ? `https://covers.openlibrary.org/b/id/${book.covers[0]}-L.jpg`
+  const urlImg = book.url
+  ? book.url
   : 'https://via.placeholder.com/150?text=Sin+Imagen'
 
   return (
@@ -57,7 +65,7 @@ function BookDetails() {
             <Button variant="primary" onClick={() => addToCart(book)}>Comprar</Button>
         </Card.Body>
         <Card.Footer>
-          <small className="text-muted">Last updated: {book['last_modified']['value']}</small>
+          {/* <small className="text-muted">Last updated: {book['last_modified']['value']}</small> */}
         </Card.Footer>
     </Card>
   )

@@ -17,7 +17,7 @@ function Header () {
   const handleSearch = (e) => {
     e.preventDefault();
     if (searchValue.trim() !== "") {
-      console.log(searchValue)
+      
       navigate(`/Find?query=${searchValue}`); // Redirige a la página de resultados con el valor de búsqueda
     }
   };
@@ -48,15 +48,15 @@ function Header () {
                         title="Categorias principales"
                         id={`offcanvasNavbarDropdown-expand-${expand}`}
                       >
-                        <NavDropdown.Item href="/Javascript">
-                            Javascript
+                        <NavDropdown.Item href="/Novela">
+                            Novela
                         </NavDropdown.Item>
-                        <NavDropdown.Item href="/Python">
-                            Python
+                        <NavDropdown.Item href="/Ficcion">
+                            Ficción
                         </NavDropdown.Item>
                         <NavDropdown.Divider />
-                        <NavDropdown.Item href="/Criptografia">
-                            Criptografía
+                        <NavDropdown.Item href="/Fantasia">
+                            Fantasía
                         </NavDropdown.Item>
                       </NavDropdown>
                       <Nav.Link href="#"><CartOffCanvas /></Nav.Link>

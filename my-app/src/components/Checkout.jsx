@@ -4,10 +4,45 @@ import { useCart } from './CartContext';
 import { Button, Table } from 'react-bootstrap';
 import Alert from 'react-bootstrap/Alert';
 import { Link } from 'react-router-dom';
+import axios from 'axios';
+
+const addPurchase = async (cart) => {
+
+  try {
+    const purchase = cart[0];
+    console.log(purchase); 
+
+    const url =  "http://localhost:8762/ms-books-payments/purchases";
+    const body = 
+    {
+      "targetMethod": "POST",
+      "queryParams": {},
+      "body": {
+        "bookId": purchase.id,
+        "quantity": 1,
+        "buyer": "Pedro Sanchez",
+        "status": "PENDING",
+        "purchaseDate": ""
+      }
+    }
+
+    const response = await axios.post(url, body);
+    if (!response.status) throw new Error('Error doing purchase');
+    
+    const { data } = response;
+    console.log(data)
+    return data;
+
+  } catch (error) {
+    console.error('Error', error);
+    return {};
+  }
+}; 
 
 const Checkout = () => {
   const { cart, dispatch } = useCart();
   const [show, setShow] = useState(false);
+  const [ purchaseDone, setPurchaseDone ] = useState({});
 
   const removeFromCart = (book) => {
     dispatch({ type: 'REMOVE_FROM_CART', payload: book });
@@ -16,6 +51,24 @@ const Checkout = () => {
   const clearCart = () => {
     dispatch({ type: 'CLEAR_CART' });
   };
+
+  const handleSubmitPurchase = (cart, e) => {
+    e.preventDefault();
+    
+    const data = addPurchase(cart)
+    .then((response) => {
+
+      console.log(response)
+      if (response) {
+        
+        setPurchaseDone(response);
+        setShow(true);
+      } else {
+        console.error('No se realizó correctamente la compra');
+      }
+    });
+
+  }
 
   return (
     <div id="div-table">
@@ -61,7 +114,7 @@ const Checkout = () => {
             <Alert show={show} variant="success">
             <Alert.Heading>Pago realizado</Alert.Heading>
                 <p>
-                Su pago se ha realizado satisfactoriamente, al cerrar esta ventana sera redirigido al inicio.
+                El pago se ha realizado satisfactoriamente a nombre de {purchaseDone.buyer}, al cerrar esta ventana sera redirigido al inicio.
                 </p>
                 <hr />
                 <div className="d-flex justify-content-end">
@@ -72,7 +125,7 @@ const Checkout = () => {
                 </Link>
                 </div>
             </Alert>
-            {!show && <Button onClick={ () => setShow(true) } className="ms-2" variant="success">Pagar</Button>}
+            {!show && <Button onClick={ (e) => handleSubmitPurchase(cart, e) } className="ms-2" variant="success">Pagar</Button>}
         </div>
       )}
     </div>
